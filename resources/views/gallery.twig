@@ -1,0 +1,12 @@
+<span {{ attributes|raw }}>
+    {% for anchor in anchors %}
+        {% set href = anchor.anchor.original.url %}
+        {% set src = anchor.anchor.image.url %}
+        {% set title = anchor.anchor.entry.title|trim %}
+        {% set alt = anchor.anchor.entry.alt|trim %}
+
+        <a href="{{ href }}" {{ anchor.attributes|raw }} {% if title %} title="{{ title }}" {% endif %}>
+            <img src="{{ src }}" alt="{{ alt }}">
+        </a>
+    {% endfor %}
+</span>
