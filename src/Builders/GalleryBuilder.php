@@ -78,7 +78,7 @@ class GalleryBuilder extends Builder
     {
         $method = strtolower(str_replace('image', '', $method));
 
-        $this->passes[$method] = $args;
+        $this->passes[] = [$method, $args];
 
         return $this;
     }
@@ -93,8 +93,8 @@ class GalleryBuilder extends Builder
         $anchors = [];
 
         foreach ($this->anchors as $anchor) {
-            foreach ($this->passes as $method => $args) {
-                $anchor = call_user_func_array([$anchor, $method], $args);
+            foreach ($this->passes as $pass) {
+                $anchor = call_user_func_array([$anchor, $pass[0]], $pass[1]);
             }
 
             $anchors[] = $anchor->get();
