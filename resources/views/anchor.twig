@@ -1,8 +1,9 @@
 {% set href = anchor.original.url %}
+{% set attr = anchor.attributes %}
 {% set src = anchor.image.url %}
 {% set title = anchor.entry.title|trim %}
 {% set alt = anchor.entry.alt|trim %}
 
-<a href="{{ href }}" {{ attributes|raw }} {% if title %} title="{{ title }}" {% endif %}>
+<a href="{{ href }}" {{ attr|raw }} {% if title %} title="{{ title }}" {% endif %}>
     <img src="{{ src }}" alt="{{ alt }}">
 </a>

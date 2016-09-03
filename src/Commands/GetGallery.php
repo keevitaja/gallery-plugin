@@ -2,12 +2,12 @@
 
 namespace Keevitaja\GalleryPlugin\Commands;
 
-use Anomaly\FilesModule\File\Command\GetFile;
+use Anomaly\FilesModule\Folder\Command\GetFolder;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Keevitaja\GalleryPlugin\AnchorBuilder;
+use Keevitaja\GalleryPlugin\GalleryBuilder;
 
-class GetAnchorTag implements SelfHandling
+class GetGallery implements SelfHandling
 {
     use DispatchesJobs;
 
@@ -25,8 +25,12 @@ class GetAnchorTag implements SelfHandling
 
     public function handle()
     {
-        $file = $this->dispatch(new GetFile($this->identifier));
+        $folder = $this->dispatch(new GetFolder($this->identifier));
 
-        if ($file) return new AnchorBuilder($this->dispatch(new GetAnchor($file)));
+        if ( ! $folder) return;
+
+        $files = $folder->getFiles();
+
+        if (count($files) > 0) return new GalleryBuilder($files);
     }
 }

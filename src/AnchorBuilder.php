@@ -29,16 +29,25 @@ class AnchorBuilder extends Builder
     }
 
     /**
-     * Get anchor
+     * Get anchor components
      *
      * @return Anonymous class
      */
     public function get()
     {
-        return [
-            'anchor' => $this->anchor,
-            'attributes' => (new AttributesParser())->parse($this->attributes)
-        ];
+        $this->anchor->attributes = (new AttributesParser())->parse($this->attributes);
+
+        return $this->anchor;
+    }
+
+    /**
+     * Return anchor tag
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) view($this->view, ['anchor' => $this->get()]);
     }
 }
 

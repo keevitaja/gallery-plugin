@@ -1,11 +1,14 @@
-<span {{ attributes|raw }}>
-    {% for anchor in anchors %}
-        {% set href = anchor.anchor.original.url %}
-        {% set src = anchor.anchor.image.url %}
-        {% set title = anchor.anchor.entry.title|trim %}
-        {% set alt = anchor.anchor.entry.alt|trim %}
+{% set attr = gallery.attributes %}
 
-        <a href="{{ href }}" {{ anchor.attributes|raw }} {% if title %} title="{{ title }}" {% endif %}>
+<span {{ attr|raw }}>
+    {% for anchor in gallery.anchors %}
+        {% set href = anchor.original.url %}
+        {% set attr = anchor.attributes %}
+        {% set src = anchor.image.url %}
+        {% set title = anchor.entry.title|trim %}
+        {% set alt = anchor.entry.alt|trim %}
+
+        <a href="{{ href }}" {{ attr|raw }} {% if title %} title="{{ title }}" {% endif %}>
             <img src="{{ src }}" alt="{{ alt }}">
         </a>
     {% endfor %}

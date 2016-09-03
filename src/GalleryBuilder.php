@@ -3,23 +3,25 @@
 namespace Keevitaja\GalleryPlugin;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Keevitaja\GalleryPlugin\AnchorBuilder;
 use Keevitaja\GalleryPlugin\Commands\GetAnchor;
 
 class GalleryBuilder extends Builder
 {
     use DispatchesJobs;
 
-    public $passes = [];
+    public $gallery;
 
-    public $anchors = [];
+    protected $passes = [];
+
+    protected $anchors = [];
 
     public function __construct($files)
     {
         foreach ($files as $file) {
-            $this->anchors[] = (new AnchorBuilder($this->dispatch(new GetAnchor($file))))->clear();
+            $this->anchors[] = $this->dispatch(new GetAnchor($file->id))->clear();
         }
 
+        $this->gallery = new GalleryComponents();
         $this->view = config('keevitaja.plugin.gallery::addon.view.gallery');
         $this->attributes['class'][] = config('keevitaja.plugin.gallery::addon.class.gallery');
     }
@@ -62,10 +64,20 @@ class GalleryBuilder extends Builder
 
             $anchors[] = $anchor->get();
         }
+        
+        $this->gallery->attributes = (new AttributesParser())->parse($this->attributes);
+        $this->gallery->anchors = $anchors;
 
-        return [
-            'anchors' => $anchors,
-            'attributes' => (new AttributesParser())->parse($this->attributes)
-        ];
+        return $this->gallery;
+    }
+
+    /**
+     * Return gallery tag
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) view($this->view, ['gallery' => $this->get()]);
     }
 }

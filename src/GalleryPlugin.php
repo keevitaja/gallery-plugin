@@ -1,8 +1,8 @@
 <?php namespace Keevitaja\GalleryPlugin;
 
 use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
-use Keevitaja\GalleryPlugin\Commands\GetAnchorTag;
-use Keevitaja\GalleryPlugin\Commands\GetGalleryTag;
+use Keevitaja\GalleryPlugin\Commands\GetAnchor;
+use Keevitaja\GalleryPlugin\Commands\GetGallery;
 use Twig_SimpleFunction;
 
 class GalleryPlugin extends Plugin
@@ -13,13 +13,13 @@ class GalleryPlugin extends Plugin
             new Twig_SimpleFunction(
                 config('keevitaja.plugin.gallery::addon.plugin.anchor'),
                 function($identifier) {
-                    return $this->dispatch(new GetAnchorTag($identifier));
+                    return $this->dispatch(new GetAnchor($identifier));
                 }
             ),
             new Twig_SimpleFunction(
                 config('keevitaja.plugin.gallery::addon.plugin.gallery'),
                 function($identifier) {
-                    return $this->dispatch(new GetGalleryTag($identifier));
+                    return $this->dispatch(new GetGallery($identifier));
                 }
             )
         ];

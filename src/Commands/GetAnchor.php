@@ -4,35 +4,30 @@ namespace Keevitaja\GalleryPlugin\Commands;
 
 use Anomaly\FilesModule\File\Command\GetFile;
 use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Keevitaja\GalleryPlugin\AnchorBuilder;
+use Keevitaja\GalleryPlugin\AnchorComponents;
 
 class GetAnchor implements SelfHandling
 {
-    public $file;
+    use DispatchesJobs;
 
-    public function __construct($file)
+    /**
+     * Image identifier
+     *
+     * @var string
+     */
+    protected $identifier;
+
+    public function __construct($identifier)
     {
-        $this->file = $file;
+        $this->identifier = $identifier;
     }
 
     public function handle()
     {
-        return new class($this->file) {
-            public $file;
+        $file = $this->dispatch(new GetFile($this->identifier));
 
-            public $entry;
-
-            public $original;
-
-            public $image;
-
-            public function __construct($file)
-            {
-                $this->file = $file;
-                $this->entry = $this->file->entry;
-                $this->original = $this->file->image();
-                $this->image = clone($this->original);
-            }
-        };
+        if ($file) return new AnchorBuilder(new AnchorComponents($file));
     }
 }

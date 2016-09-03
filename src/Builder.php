@@ -58,15 +58,5 @@ abstract class Builder
 
         return $this;
     }
-
-    /**
-     * Return tag
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return (string) view($this->view, $this->get());
-    }
 }
 
