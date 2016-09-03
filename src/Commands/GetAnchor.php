@@ -6,8 +6,8 @@ use Anomaly\FilesModule\File\Command\GetFile;
 use Anomaly\FilesModule\File\FileModel;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Keevitaja\GalleryPlugin\AnchorBuilder;
-use Keevitaja\GalleryPlugin\AnchorComponents;
+use Keevitaja\GalleryPlugin\Builders\AnchorBuilder;
+use Keevitaja\GalleryPlugin\Components\AnchorComponents;
 
 class GetAnchor implements SelfHandling
 {

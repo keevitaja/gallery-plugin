@@ -1,9 +1,14 @@
 <?php 
 
-namespace Keevitaja\GalleryPlugin;
+namespace Keevitaja\GalleryPlugin\Builders;
+
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Keevitaja\GalleryPlugin\Commands\ParseAttributes;
 
 class AnchorBuilder extends Builder
 {
+    use DispatchesJobs;
+
     /**
      * Anchor components
      *
@@ -40,7 +45,7 @@ class AnchorBuilder extends Builder
      */
     public function get()
     {
-        $this->anchor->attributes = (new AttributesParser())->parse($this->attributes);
+        $this->anchor->attributes = $this->dispatch(new ParseAttributes($this->attributes));
 
         return $this->anchor;
     }

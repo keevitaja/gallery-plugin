@@ -1,9 +1,11 @@
 <?php 
 
-namespace Keevitaja\GalleryPlugin;
+namespace Keevitaja\GalleryPlugin\Builders;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Keevitaja\GalleryPlugin\Commands\GetAnchor;
+use Keevitaja\GalleryPlugin\Commands\ParseAttributes;
+use Keevitaja\GalleryPlugin\Components\GalleryComponents;
 
 class GalleryBuilder extends Builder
 {
@@ -65,7 +67,7 @@ class GalleryBuilder extends Builder
             $anchors[] = $anchor->get();
         }
         
-        $this->gallery->attributes = (new AttributesParser())->parse($this->attributes);
+        $this->gallery->attributes = $this->dispatch(new ParseAttributes($this->attributes));
         $this->gallery->anchors = $anchors;
 
         return $this->gallery;

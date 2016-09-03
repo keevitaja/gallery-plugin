@@ -1,6 +1,6 @@
 <?php 
 
-namespace Keevitaja\GalleryPlugin;
+namespace Keevitaja\GalleryPlugin\Components;
 
 class GalleryComponents
 {

@@ -5,7 +5,7 @@ namespace Keevitaja\GalleryPlugin\Commands;
 use Anomaly\FilesModule\Folder\Command\GetFolder;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Keevitaja\GalleryPlugin\GalleryBuilder;
+use Keevitaja\GalleryPlugin\Builders\GalleryBuilder;
 
 class GetGallery implements SelfHandling
 {
