@@ -26,7 +26,7 @@ class GetAnchor implements SelfHandling
     }
 
     /**
-     * Create new anchor
+     * Create anchor
      *
      * @return use Keevitaja\GalleryPlugin\AnchorBuilder
      */

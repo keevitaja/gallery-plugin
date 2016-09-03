@@ -41,7 +41,7 @@ class AnchorBuilder extends Builder
     /**
      * Get anchor components
      *
-     * @return Anonymous class
+     * @return Keevitaja\GalleryPlugin\Components\AnchorComponents
      */
     public function get()
     {

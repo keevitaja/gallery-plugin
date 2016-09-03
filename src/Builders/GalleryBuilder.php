@@ -11,10 +11,25 @@ class GalleryBuilder extends Builder
 {
     use DispatchesJobs;
 
+    /**
+     * Gallery components
+     *
+     * @var Keevitaja\GalleryPlugin\Components\GalleryComponents
+     */
     protected $gallery;
 
+    /**
+     * Functions to apply to images
+     *
+     * @var array
+     */
     protected $passes = [];
 
+    /**
+     * Anchor objects
+     *
+     * @var array
+     */
     protected $anchors = [];
 
     public function __construct($files)
@@ -28,6 +43,11 @@ class GalleryBuilder extends Builder
         $this->attributes['class'][] = config('keevitaja.plugin.gallery::addon.class.gallery');
     }
 
+    /**
+     * Filter anchors array by filters. Chainable
+     *
+     * @return self
+     */
     public function keywords()
     {
         $keywords = func_get_args();
@@ -46,6 +66,14 @@ class GalleryBuilder extends Builder
         return $this;
     }
 
+    /**
+     * Applay to Keevitaja\GalleryPlugin\Builders\AnchorBuilder. Chainable
+     *
+     * @param  string $method
+     * @param  array $args
+     *
+     * @return self
+     */
     public function __call($method, $args)
     {
         $method = strtolower(str_replace('image', '', $method));
@@ -55,6 +83,11 @@ class GalleryBuilder extends Builder
         return $this;
     }
 
+    /**
+     * Get gallery components
+     *
+     * @return Keevitaja\GalleryPlugin\Components\GalleryComponents
+     */
     public function get()
     {
         $anchors = [];
