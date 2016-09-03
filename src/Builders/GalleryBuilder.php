@@ -11,7 +11,7 @@ class GalleryBuilder extends Builder
 {
     use DispatchesJobs;
 
-    public $gallery;
+    protected $gallery;
 
     protected $passes = [];
 

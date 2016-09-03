@@ -14,7 +14,7 @@ class AnchorBuilder extends Builder
      *
      * @var Keevitaja\GalleryPlugin\AnchorComponents
      */
-    public $anchor;
+    protected $anchor;
 
     public function __construct($anchor)
     {

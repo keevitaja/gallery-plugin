@@ -11,7 +11,7 @@ class ParseAttributes implements SelfHandling
      *
      * @var array
      */
-    public $attributes;
+    protected $attributes;
 
     public function __construct($attributes)
     {
@@ -19,7 +19,7 @@ class ParseAttributes implements SelfHandling
     }
 
     /**
-     * Handles parsing raw attributes array
+     * Parse raw attributes array
      *
      * @return string
      */
