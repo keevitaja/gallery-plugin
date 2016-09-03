@@ -4,6 +4,11 @@ namespace Keevitaja\GalleryPlugin;
 
 class AnchorBuilder extends Builder
 {
+    /**
+     * Anchor components
+     *
+     * @var Keevitaja\GalleryPlugin\AnchorComponents
+     */
     public $anchor;
 
     public function __construct($anchor)

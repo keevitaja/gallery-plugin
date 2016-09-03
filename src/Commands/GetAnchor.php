@@ -16,7 +16,7 @@ class GetAnchor implements SelfHandling
     /**
      * Image identifier
      *
-     * @var string
+     * @var string|Anomaly\FilesModule\File\FileModel
      */
     protected $identifier;
 
@@ -25,6 +25,11 @@ class GetAnchor implements SelfHandling
         $this->identifier = $identifier;
     }
 
+    /**
+     * Create new anchor
+     *
+     * @return use Keevitaja\GalleryPlugin\AnchorBuilder
+     */
     public function handle()
     {
         if ($this->identifier instanceof FileModel) {

@@ -23,6 +23,11 @@ class GetGallery implements SelfHandling
         $this->identifier = $identifier;
     }
 
+    /**
+     * Create gallery
+     *
+     * @return Keevitaja\GalleryPlugin\GalleryBuilder
+     */
     public function handle()
     {
         $folder = $this->dispatch(new GetFolder($this->identifier));
