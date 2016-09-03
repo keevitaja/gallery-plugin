@@ -18,7 +18,7 @@ class GalleryBuilder extends Builder
     public function __construct($files)
     {
         foreach ($files as $file) {
-            $this->anchors[] = $this->dispatch(new GetAnchor($file->id))->clear();
+            $this->anchors[] = $this->dispatch(new GetAnchor($file))->clear();
         }
 
         $this->gallery = new GalleryComponents();

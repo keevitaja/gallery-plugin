@@ -3,6 +3,7 @@
 namespace Keevitaja\GalleryPlugin\Commands;
 
 use Anomaly\FilesModule\File\Command\GetFile;
+use Anomaly\FilesModule\File\FileModel;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Keevitaja\GalleryPlugin\AnchorBuilder;
@@ -26,7 +27,11 @@ class GetAnchor implements SelfHandling
 
     public function handle()
     {
-        $file = $this->dispatch(new GetFile($this->identifier));
+        if ($this->identifier instanceof FileModel) {
+            $file = $this->identifier;
+        } else {
+            $file = $this->dispatch(new GetFile($this->identifier));
+        }
 
         if ($file) return new AnchorBuilder(new AnchorComponents($file));
     }
